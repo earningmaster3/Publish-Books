@@ -30,7 +30,11 @@ const CreatePost = () => {
     };
 
     return (
+
+        
+
         <div className="max-w-xl mx-auto mt-10 p-8 bg-white rounded-2xl shadow-2xl border border-gray-100">
+            
             <h2 className="text-3xl font-extrabold text-gray-800 mb-6 text-center tracking-tight">Create a New Post</h2>
 
             <div className="space-y-5">

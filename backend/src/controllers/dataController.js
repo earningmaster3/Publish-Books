@@ -41,6 +41,8 @@ export const createPost = async (req, res) => {
 
         const { title, content, author } = req.body;
 
+
+
         if (!title || !content) {
             return res.status(400).json({ message: "All fields are required" });
         }
@@ -153,14 +155,24 @@ export const deletePost = async (req, res) => {
 //get all posts
 
 export const getAllPosts = async (req, res) => {
-    try {
-        const posts = await prisma.pOST.findMany({
+    const {search} = req.query;
+
+    try{
+        const findPost = await prisma.pOST.findMany({
+            where:search ? {
+                title:{
+                    contains: search,
+                    mode: "insensitive"
+                }
+             }: {},
             include: {
                 author: true
+            },            orderBy: {
+                createdAt: "desc"
             }
         })
-        res.json({ message: "Posts get successfully", posts });
-    } catch (error) {
+        res.json({ message: "Posts get successfully", posts: findPost });
+    }catch (error) {
         console.log("Error in get all posts", error);
         res.status(500).json({ message: "Internal server error" });
     }
