@@ -5,8 +5,8 @@ export const createPost = async (userdata) => {
     return response.data
 }
 
-export const getAllPosts = async () => {
-    const response = await api.get("/all-posts")
+export const getAllPosts = async (search="") => {
+    const response = await api.get(`/all-posts?search=${search}`)
     return response.data
 }
 
